@@ -132,16 +132,18 @@ export default function Home() {
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <div className="relative">
-            <div className="absolute -inset-8 rounded-full bg-cyan-400/10 blur-3xl" />
-            <Image
-              src="/assets/coin-logo-2.png"
-              alt="NEX Coin"
-              width={420}
-              height={420}
-              priority
-              className="relative drop-shadow-[0_0_60px_rgba(34,211,238,0.45)]"
-            />
+          <div className="relative isolate h-[22rem] w-[22rem] sm:h-[26rem] sm:w-[26rem]">
+            <div className="absolute inset-0 rounded-full bg-cyan-400/10 blur-3xl" />
+            <div className="absolute inset-5 overflow-hidden rounded-full border border-cyan-300/35 bg-slate-950/70 shadow-[0_0_80px_-10px_rgba(34,211,238,0.45)]">
+              <Image
+                src="/assets/Coin%20Logo%202.png"
+                alt="NEX Coin"
+                fill
+                priority
+                sizes="(min-width: 1024px) 26rem, 22rem"
+                className="object-cover object-center scale-[1.24] saturate-125 contrast-110"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -302,9 +304,9 @@ export default function Home() {
                 const isNext = status === "next";
 
                 return (
-                  <div key={title} className="relative md:pl-14 xl:pl-0 xl:pt-10">
+                  <div key={title} className="relative md:pl-14 xl:pl-0 xl:pt-16">
                     <div
-                      className={`absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full border text-sm font-semibold xl:left-1/2 xl:-translate-x-1/2 ${
+                      className={`absolute left-0 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border text-sm font-semibold xl:left-1/2 xl:top-0 xl:-translate-x-1/2 ${
                         isActive
                           ? "border-cyan-300 bg-cyan-400/20 text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.35)]"
                           : isNext
@@ -352,7 +354,7 @@ export default function Home() {
       <section className="relative overflow-hidden border-t border-slate-800/60">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(14,165,233,0.12),transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl px-6 py-28 text-center sm:px-10">
-          <Image src="/assets/coin-logo-1.png" alt="NEX" width={64} height={64} className="mx-auto mb-6 rounded-full ring-2 ring-cyan-400/40" />
+          <Image src="/assets/Coin%20Logo%201.png" alt="NEX" width={64} height={64} className="mx-auto mb-6 rounded-full ring-2 ring-cyan-400/40" />
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Welcome to the Nexus.</h2>
           <p className="text-slate-300 leading-8 mb-8">
             You are no longer just an investor. You are the foundational capital of a new species of enterprise. Welcome to the future of work.

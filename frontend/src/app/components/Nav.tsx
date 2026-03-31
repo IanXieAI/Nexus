@@ -51,7 +51,7 @@ export default function Nav() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <Image
-            src="/assets/coin-logo-1.png"
+            src="/assets/Coin%20Logo%201.png"
             alt="NEX coin logo"
             width={36}
             height={36}
