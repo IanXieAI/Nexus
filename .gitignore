@@ -78,6 +78,11 @@ web_modules/
 .next
 out
 
+# Hardhat outputs
+artifacts/
+cache/
+typechain-types/
+
 # Nuxt.js build / generate output
 .nuxt
 dist

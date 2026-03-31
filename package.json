@@ -1,0 +1,28 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "description": "This `README.md` is structured to immediately capture the attention of both elite Web3 developers and institutional investors. It balances the massive \"Silicon Civilization\" narrative with concrete, highly optimized technical specifications.",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanXieAI/Nexus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/IanXieAI/Nexus/issues"
+  },
+  "homepage": "https://github.com/IanXieAI/Nexus#readme",
+  "devDependencies": {
+    "hardhat": "^3.2.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  }
+}
