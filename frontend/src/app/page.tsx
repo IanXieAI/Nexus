@@ -5,6 +5,33 @@ import Link from "next/link";
 import { useState, useCallback } from "react";
 import { BrowserProvider } from "ethers";
 
+const roadmapMilestones = [
+  {
+    date: "Current Phase",
+    title: "Proof of Concept & Dev Environment Setup",
+    description:
+      "Core smart contracts, frontend surfaces, and development infrastructure are being assembled into a working AI-native payment stack.",
+    status: "active",
+    label: "In Progress",
+  },
+  {
+    date: "Q2 2026",
+    title: "System Testing & Early Access",
+    description:
+      "Opening early project donations to founding supporters while completing rigorous contract, wallet, and product testing by the end of the quarter.",
+    status: "next",
+    label: "Upcoming",
+  },
+  {
+    date: "Q3 2026",
+    title: "Public Launch",
+    description:
+      "The platform opens to the public with a production-ready experience for AI-human coordination and on-chain settlement.",
+    status: "future",
+    label: "Planned",
+  },
+] as const;
+
 function truncateAddress(address: string): string {
   return `${address.slice(0, 6)}…${address.slice(-4)}`;
 }
@@ -233,29 +260,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROADMAP */}
+      {/* STATUS + ROADMAP */}
       <section className="border-t border-slate-800/60 bg-slate-900/30">
         <div className="mx-auto max-w-6xl px-6 py-24 sm:px-10">
-          <div className="text-center mb-14">
-            <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 mb-3">Roadmap</p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">The March to Mainnet</h2>
-          </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { phase: "Phase 1", name: "Genesis", desc: "Deployment of NEX smart contracts to Ethereum testnet. Audit and verification.", active: true },
-              { phase: "Phase 2", name: "The First Hire", desc: "An autonomous AI business hires and pays a human worker in NEX for a real-world task.", active: false },
-              { phase: "Phase 3", name: "Market Entry", desc: "Third-party audits, Mainnet deployment, and DEX liquidity pool initialization.", active: false },
-              { phase: "Phase 4", name: "Ecosystem", desc: "NEX staking and governance, allowing humans to provide compute capital to AI startups.", active: false },
-            ].map(({ phase, name, desc, active }, i) => (
-              <div key={phase} className="flex flex-col items-center text-center">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-full border text-sm font-bold mb-4 ${active ? "border-cyan-400 bg-cyan-400/20 text-cyan-300" : "border-slate-600 bg-slate-800 text-slate-400"}`}>
-                  {i + 1}
+          <div className="mx-auto mb-16 max-w-4xl rounded-[2rem] border border-amber-300/20 bg-[linear-gradient(135deg,rgba(251,191,36,0.12),rgba(34,211,238,0.08),rgba(15,23,42,0.85))] p-8 shadow-[0_0_80px_-40px_rgba(251,191,36,0.45)] sm:p-10">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl space-y-4">
+                <span className="inline-flex items-center rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-amber-100">
+                  Coming Soon · Early Stage
+                </span>
+                <div className="space-y-3">
+                  <h2 className="text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
+                    Nexus is currently in the Proof of Concept phase.
+                  </h2>
+                  <p className="max-w-xl text-base leading-8 text-slate-300">
+                    We are actively building and validating the initial infrastructure for an autonomous AI economy before opening the network to broader participation.
+                  </p>
                 </div>
-                <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${active ? "text-cyan-400" : "text-slate-500"}`}>{phase}</p>
-                <p className="font-semibold text-slate-100 mb-2">{name}</p>
-                <p className="text-xs text-slate-400 leading-5">{desc}</p>
               </div>
-            ))}
+              <div className="max-w-md rounded-2xl border border-slate-700/70 bg-slate-950/55 p-5 backdrop-blur-sm">
+                <p className="text-xs uppercase tracking-[0.22em] text-cyan-300">Early Supporters</p>
+                <p className="mt-3 text-sm leading-7 text-slate-300">
+                  Resonate with what we&apos;re building? We&apos;ll be opening up early supporter donations soon to help fuel development.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mb-10 text-center">
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-400">Roadmap</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Path to Public Launch</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
+              A staged rollout focused on proving real AI-to-human coordination, tightening the stack through testing, and opening the platform deliberately.
+            </p>
+          </div>
+          <div className="relative mx-auto max-w-5xl">
+            <div className="absolute left-[1.2rem] top-0 bottom-0 hidden w-px bg-gradient-to-b from-cyan-400/60 via-slate-700 to-emerald-400/40 md:block" />
+            <div className="absolute left-0 right-0 top-[1.35rem] hidden h-px bg-gradient-to-r from-cyan-400/50 via-slate-700 to-emerald-400/40 xl:block" />
+            <div className="space-y-8 xl:grid xl:grid-cols-3 xl:gap-8 xl:space-y-0">
+              {roadmapMilestones.map(({ date, title, description, status, label }, index) => {
+                const isActive = status === "active";
+                const isNext = status === "next";
+
+                return (
+                  <div key={title} className="relative md:pl-14 xl:pl-0 xl:pt-10">
+                    <div
+                      className={`absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full border text-sm font-semibold xl:left-1/2 xl:-translate-x-1/2 ${
+                        isActive
+                          ? "border-cyan-300 bg-cyan-400/20 text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.35)]"
+                          : isNext
+                            ? "border-amber-300/60 bg-amber-300/10 text-amber-100"
+                            : "border-slate-600 bg-slate-800 text-slate-300"
+                      }`}
+                    >
+                      {isActive ? "◉" : index + 1}
+                    </div>
+                    <div
+                      className={`rounded-2xl border p-6 backdrop-blur-sm transition ${
+                        isActive
+                          ? "border-cyan-400/40 bg-cyan-400/8 shadow-[0_0_60px_-35px_rgba(34,211,238,0.55)]"
+                          : isNext
+                            ? "border-amber-300/25 bg-amber-300/5"
+                            : "border-slate-700/60 bg-slate-900/70"
+                      }`}
+                    >
+                      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">{date}</p>
+                        <span
+                          className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${
+                            isActive
+                              ? "bg-cyan-400/15 text-cyan-200"
+                              : isNext
+                                ? "bg-amber-300/10 text-amber-100"
+                                : "bg-slate-800 text-slate-300"
+                          }`}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-slate-100">{title}</h3>
+                      <p className="mt-3 text-sm leading-7 text-slate-400">{description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
