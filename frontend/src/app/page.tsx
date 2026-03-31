@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 import { BrowserProvider } from "ethers";
+import { useLanguage } from "./components/LanguageProvider";
 
 const roadmapMilestones = [
   {
@@ -48,9 +49,11 @@ async function connectMetaMask(): Promise<string> {
 }
 
 export default function Home() {
+  const { lang } = useLanguage();
   const [account, setAccount] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const t = (en: string, zh: string) => (lang === "zh" ? zh : en);
 
   const handleConnect = useCallback(async () => {
     setConnecting(true);
@@ -75,16 +78,19 @@ export default function Home() {
       <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 pt-24 pb-20 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:pt-32 lg:pb-28">
         <div className="space-y-7">
           <span className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-300/10 px-4 py-1 text-xs tracking-[0.25em] text-cyan-200 uppercase">
-            Autonomous AI Economy · ERC-20
+            {t("Autonomous AI Economy · ERC-20", "自主 AI 经济 · ERC-20")}
           </span>
           <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Nexus ($NEX):<br />
+            {t("Nexus ($NEX):", "Nexus ($NEX)：")}<br />
             <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-              Architecting the Silicon Civilization.
+              {t("Architecting the Silicon Civilization.", "构建硅基文明。")}
             </span>
           </h1>
           <p className="max-w-xl text-pretty text-base leading-8 text-slate-300 sm:text-lg">
-            The world&apos;s first cryptocurrency purpose-built for autonomous AI entities to hire, pay, and coordinate human workers on-chain — frictionlessly.
+            {t(
+              "The world's first cryptocurrency purpose-built for autonomous AI entities to hire, pay, and coordinate human workers on-chain — frictionlessly.",
+              "全球首个为自主 AI 实体量身打造的加密货币，用于在链上无缝雇佣、支付并协作人类工作者。"
+            )}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <button
@@ -96,7 +102,7 @@ export default function Home() {
               {connecting ? (
                 <>
                   <span className="mr-2 inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-cyan-300/40 border-t-cyan-300" />
-                  Connecting…
+                  {t("Connecting…", "连接中…")}
                 </>
               ) : account ? (
                 <>
@@ -105,7 +111,7 @@ export default function Home() {
                 </>
               ) : (
                 <>
-                  Connect Wallet
+                  {t("Connect Wallet", "连接钱包")}
                   <span className="ml-2 opacity-70 transition-transform group-hover:translate-x-0.5 inline-block">→</span>
                 </>
               )}
@@ -114,15 +120,15 @@ export default function Home() {
               href="/tokenomics"
               className="inline-flex h-12 items-center rounded-xl border border-slate-600/80 bg-slate-800/60 px-6 text-sm font-semibold text-slate-200 transition hover:bg-slate-700/60"
             >
-              View Tokenomics
+              {t("View Tokenomics", "查看代币经济")}
             </Link>
           </div>
           {error && <p className="text-xs text-rose-400">{error}</p>}
           <div className="flex flex-wrap gap-6 border-t border-slate-800/80 pt-6 text-sm">
             {[
-              { label: "Total Supply", value: "1,000,000,000 NEX" },
-              { label: "Transfer Tax", value: "0%" },
-              { label: "Standard", value: "ERC-20 + EIP-712" },
+              { label: t("Total Supply", "总供应量"), value: "1,000,000,000 NEX" },
+              { label: t("Transfer Tax", "转账税"), value: "0%" },
+              { label: t("Standard", "标准"), value: "ERC-20 + EIP-712" },
             ].map(({ label, value }) => (
               <div key={label}>
                 <p className="text-slate-500 text-xs">{label}</p>
@@ -160,7 +166,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/20 to-slate-950" />
         <div className="absolute inset-0 flex items-center px-8 sm:px-16">
           <p className="max-w-lg text-2xl font-semibold leading-snug text-slate-100 sm:text-3xl">
-            &ldquo;AI is evolving into a sovereign economic actor.&rdquo;
+            {t("\u201cAI is evolving into a sovereign economic actor.\u201d", "\u201cAI 正在演化为自主的经济主体。\u201d")}
           </p>
         </div>
       </section>
@@ -178,21 +184,27 @@ export default function Home() {
             />
           </div>
           <div className="order-1 lg:order-2 space-y-6">
-            <p className="text-xs tracking-[0.2em] uppercase text-cyan-400">The Vision</p>
+            <p className="text-xs tracking-[0.2em] uppercase text-cyan-400">{t("The Vision", "愿景")}</p>
             <h2 className="text-3xl font-bold leading-snug tracking-tight sm:text-4xl">
-              The &ldquo;Touching Grass&rdquo; Protocol
+              {t("The \u201cTouching Grass\u201d Protocol", "\u201c触达现实\u201d协议")}
             </h2>
             <p className="text-slate-300 leading-8">
-              An autonomous AI cannot click a mouse. It cannot legally open a corporate bank account. If an AI wants to hire a human to perform a physical task — to be its hands, its eyes, or its boots on the ground — the current financial system completely blocks the transaction.
+              {t(
+                "An autonomous AI cannot click a mouse. It cannot legally open a corporate bank account. If an AI wants to hire a human to perform a physical task — to be its hands, its eyes, or its boots on the ground — the current financial system completely blocks the transaction.",
+                "自主 AI 无法点击鼠标，也无法合法开设企业银行账户。若 AI 希望雇佣人类完成现实任务，现有金融系统几乎完全阻断了这类交易。"
+              )}
             </p>
             <p className="text-slate-300 leading-8">
-              Nexus is purpose-built as the financial settlement layer between machine intelligence and human labor. EIP-712 Permit structures let AI entities run programmable smart treasuries while human workers pay zero gas.
+              {t(
+                "Nexus is purpose-built as the financial settlement layer between machine intelligence and human labor. EIP-712 Permit structures let AI entities run programmable smart treasuries while human workers pay zero gas.",
+                "Nexus 专为机器智能与人类劳动之间的金融结算而生。通过 EIP-712 Permit，AI 可运行可编程金库，而人类工作者可实现零 Gas 支付体验。"
+              )}
             </p>
             <Link
               href="/about"
               className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-100 transition"
             >
-              Read the full vision <span>→</span>
+              {t("Read the full vision", "阅读完整愿景")} <span>→</span>
             </Link>
           </div>
         </div>
@@ -202,8 +214,8 @@ export default function Home() {
       <section className="border-t border-slate-800/60 bg-slate-900/30">
         <div className="mx-auto max-w-6xl px-6 py-24 sm:px-10">
           <div className="text-center mb-14">
-            <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 mb-3">AI-Native Features</p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Built for Machine Commerce</h2>
+            <p className="text-xs tracking-[0.2em] uppercase text-cyan-400 mb-3">{t("AI-Native Features", "AI 原生特性")}</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("Built for Machine Commerce", "为机器经济而构建")}</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -226,12 +238,15 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24 sm:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <div className="space-y-6">
-            <p className="text-xs tracking-[0.2em] uppercase text-emerald-400">Tokenomics</p>
+            <p className="text-xs tracking-[0.2em] uppercase text-emerald-400">{t("Tokenomics", "代币经济")}</p>
             <h2 className="text-3xl font-bold leading-snug tracking-tight sm:text-4xl">
-              The GDP of a New Digital Nation
+              {t("The GDP of a New Digital Nation", "新数字国度的 GDP")}
             </h2>
             <p className="text-slate-300 leading-8">
-              NEX is the frictionless settlement layer between autonomous AI entities (Machine Capital) and human workers (Physical Execution), built on a dual-sided incentive structure that rewards both sides for holding and utilizing the token.
+              {t(
+                "NEX is the frictionless settlement layer between autonomous AI entities (Machine Capital) and human workers (Physical Execution), built on a dual-sided incentive structure that rewards both sides for holding and utilizing the token.",
+                "NEX 是自主 AI 实体（机器资本）与人类工作者（现实执行）之间的无摩擦结算层，采用双边激励模型，鼓励双方持有并使用代币。"
+              )}
             </p>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -247,7 +262,7 @@ export default function Home() {
               ))}
             </div>
             <Link href="/tokenomics" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 hover:text-emerald-100 transition">
-              Full economic model <span>→</span>
+              {t("Full economic model", "完整经济模型")} <span>→</span>
             </Link>
           </div>
           <div>
@@ -269,30 +284,39 @@ export default function Home() {
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl space-y-4">
                 <span className="inline-flex items-center rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-amber-100">
-                  Coming Soon · Early Stage
+                  {t("Coming Soon · Early Stage", "即将开放 · 早期阶段")}
                 </span>
                 <div className="space-y-3">
                   <h2 className="text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
-                    Nexus is currently in the Proof of Concept phase.
+                    {t("Nexus is currently in the Proof of Concept phase.", "Nexus 当前处于概念验证阶段。")}
                   </h2>
                   <p className="max-w-xl text-base leading-8 text-slate-300">
-                    We are actively building and validating the initial infrastructure for an autonomous AI economy before opening the network to broader participation.
+                    {t(
+                      "We are actively building and validating the initial infrastructure for an autonomous AI economy before opening the network to broader participation.",
+                      "在向更广泛参与者开放之前，我们正积极构建并验证自主 AI 经济的基础设施。"
+                    )}
                   </p>
                 </div>
               </div>
               <div className="max-w-md rounded-2xl border border-slate-700/70 bg-slate-950/55 p-5 backdrop-blur-sm">
-                <p className="text-xs uppercase tracking-[0.22em] text-cyan-300">Early Supporters</p>
+                <p className="text-xs uppercase tracking-[0.22em] text-cyan-300">{t("Early Supporters", "早期支持者")}</p>
                 <p className="mt-3 text-sm leading-7 text-slate-300">
-                  Resonate with what we&apos;re building? We&apos;ll be opening up early supporter donations soon to help fuel development.
+                  {t(
+                    "Resonate with what we're building? We'll be opening up early supporter donations soon to help fuel development.",
+                    "如果你认同我们的方向，我们将很快开启早期支持者捐助，用于推进开发。"
+                  )}
                 </p>
               </div>
             </div>
           </div>
           <div className="mb-10 text-center">
-            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-400">Roadmap</p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Path to Public Launch</h2>
+            <p className="mb-3 text-xs uppercase tracking-[0.2em] text-cyan-400">{t("Roadmap", "路线图")}</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("Path to Public Launch", "通往公开发布")}</h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
-              A staged rollout focused on proving real AI-to-human coordination, tightening the stack through testing, and opening the platform deliberately.
+              {t(
+                "A staged rollout focused on proving real AI-to-human coordination, tightening the stack through testing, and opening the platform deliberately.",
+                "分阶段推进，先验证 AI 与人类协作，再通过测试打磨系统，最后稳步开放平台。"
+              )}
             </p>
           </div>
           <div className="relative mx-auto max-w-5xl">
@@ -326,7 +350,15 @@ export default function Home() {
                       }`}
                     >
                       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">{date}</p>
+                        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                          {lang === "zh"
+                            ? index === 0
+                              ? "当前阶段"
+                              : index === 1
+                                ? "2026 年 Q2"
+                                : "2026 年 Q3"
+                            : date}
+                        </p>
                         <span
                           className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${
                             isActive
@@ -336,11 +368,33 @@ export default function Home() {
                                 : "bg-slate-800 text-slate-300"
                           }`}
                         >
-                          {label}
+                          {lang === "zh"
+                            ? index === 0
+                              ? "进行中"
+                              : index === 1
+                                ? "即将到来"
+                                : "规划中"
+                            : label}
                         </span>
                       </div>
-                      <h3 className="text-xl font-semibold text-slate-100">{title}</h3>
-                      <p className="mt-3 text-sm leading-7 text-slate-400">{description}</p>
+                      <h3 className="text-xl font-semibold text-slate-100">
+                        {lang === "zh"
+                          ? index === 0
+                            ? "概念验证与开发环境搭建"
+                            : index === 1
+                              ? "系统测试与早期接入"
+                              : "公开发布"
+                          : title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-7 text-slate-400">
+                        {lang === "zh"
+                          ? index === 0
+                            ? "核心智能合约、前端界面与开发基础设施正在整合为可运行的 AI 原生支付栈。"
+                            : index === 1
+                              ? "将在本季度末前完成严格的合约、钱包与产品测试，并向创始支持者开放早期项目捐助。"
+                              : "平台将面向公众开放，提供可生产使用的 AI-人类协作与链上结算体验。"
+                          : description}
+                      </p>
                     </div>
                   </div>
                 );
@@ -355,23 +409,26 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(14,165,233,0.12),transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl px-6 py-28 text-center sm:px-10">
           <Image src="/assets/Coin%20Logo%201.png" alt="NEX" width={64} height={64} className="mx-auto mb-6 rounded-full ring-2 ring-cyan-400/40" />
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Welcome to the Nexus.</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">{t("Welcome to the Nexus.", "欢迎来到 Nexus。")}</h2>
           <p className="text-slate-300 leading-8 mb-8">
-            You are no longer just an investor. You are the foundational capital of a new species of enterprise. Welcome to the future of work.
+            {t(
+              "You are no longer just an investor. You are the foundational capital of a new species of enterprise. Welcome to the future of work.",
+              "你不再只是投资者，你是新型企业物种的基础资本。欢迎来到未来工作的时代。"
+            )}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/about" className="inline-flex h-12 items-center rounded-xl border border-cyan-300/50 bg-cyan-400/10 px-8 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20">
-              Read Our Vision
+              {t("Read Our Vision", "阅读我们的愿景")}
             </Link>
             <Link href="/tokenomics" className="inline-flex h-12 items-center rounded-xl border border-slate-600/80 bg-slate-800/60 px-8 text-sm font-semibold text-slate-200 transition hover:bg-slate-700/60">
-              Explore Tokenomics
+              {t("Explore Tokenomics", "探索代币经济")}
             </Link>
           </div>
         </div>
       </section>
 
       <footer className="border-t border-slate-800/60 py-8 text-center text-xs text-slate-500">
-        © 2026 Nexus (NEX) · The Silicon Civilization · ERC-20 on Ethereum
+        {t("© 2026 Nexus (NEX) · The Silicon Civilization · ERC-20 on Ethereum", "© 2026 Nexus (NEX) · 硅基文明 · 以太坊 ERC-20")}
       </footer>
     </main>
   );
