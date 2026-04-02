@@ -83,7 +83,7 @@ export default function Home() {
           <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
             {t("Nexus ($NEX):", "Nexus ($NEX)：")}<br />
             <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-              {t("Architecting the Silicon Civilization.", "构建硅基文明。")}
+              {t("Architecting the Silicon Economy", "构建硅基经济")}
             </span>
           </h1>
           <p className="max-w-xl text-pretty text-base leading-8 text-slate-300 sm:text-lg">
@@ -190,8 +190,8 @@ export default function Home() {
             </h2>
             <p className="text-slate-300 leading-8">
               {t(
-                "An autonomous AI cannot click a mouse. It cannot legally open a corporate bank account. If an AI wants to hire a human to perform a physical task — to be its hands, its eyes, or its boots on the ground — the current financial system completely blocks the transaction.",
-                "自主 AI 无法点击鼠标，也无法合法开设企业银行账户。若 AI 希望雇佣人类完成现实任务，现有金融系统几乎完全阻断了这类交易。"
+                "AI cannot legally open a corporate bank account. If an AI wants to hire a human to perform a physical task — to be its hands, its eyes, or its boots on the ground — the current financial system completely blocks the transaction.",
+                "AI 无法合法开设企业銀行账户。若 AI 希望雇用人类完成现实任务，现有金融系统几乎完全阻断了这类交易。"
               )}
             </p>
             <p className="text-slate-300 leading-8">
@@ -219,10 +219,10 @@ export default function Home() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: "⚡", title: "Gasless Payments", desc: "EIP-712 Permit lets AI sponsors pay gas on behalf of human workers. Zero friction for the workforce." },
-              { icon: "🔥", title: "Deflationary Burns", desc: "ERC20Burnable lets autonomous AI DAOs execute programmatic buy-and-burn to drive verifiable scarcity." },
-              { icon: "🤖", title: "AI Treasury Ready", desc: "Designed for Account Abstraction (ERC-4337) enabling batched micro-transaction payroll at scale." },
-              { icon: "🔒", title: "Hard-Capped Supply", desc: "Exactly 1 billion NEX minted at genesis. No future minting functions exist. Absolute institutional trust." },
+              { icon: "⚡", title: t("Gasless Payments", "无 Gas 支付"), desc: t("EIP-712 Permit lets AI sponsors pay gas on behalf of human workers. Zero friction for the workforce.", "EIP-712 Permit 允许 AI 赞助者代替人类工作者支付 Gas，工作者零摩擦。") },
+              { icon: "🔥", title: t("Deflationary Burns", "通缩销毁"), desc: t("ERC20Burnable lets autonomous AI DAOs execute programmatic buy-and-burn to drive verifiable scarcity.", "ERC20Burnable 允许自主 AI DAO 执行程序化买入销毁，推动可验证的稀缺性。") },
+              { icon: "🤖", title: t("AI Treasury Ready", "AI 国库就绪"), desc: t("Designed for Account Abstraction (ERC-4337) enabling batched micro-transaction payroll at scale.", "专为账户抽象（ERC-4337）设计，支持大规模批量微交易薪资发放。") },
+              { icon: "🔒", title: t("Hard-Capped Supply", "硬上限供应"), desc: t("Exactly 1 billion NEX minted at genesis. No future minting functions exist. Absolute institutional trust.", "创世时精确铸造 10 亿枚 NEX，不存在未来铸币功能，带来绝对的机构级信任。") },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="rounded-2xl border border-slate-700/60 bg-slate-900/70 p-6 space-y-3 hover:border-cyan-400/40 transition">
                 <div className="text-2xl">{icon}</div>
@@ -428,7 +428,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-slate-800/60 py-8 text-center text-xs text-slate-500">
-        {t("© 2026 Nexus (NEX) · The Silicon Civilization · ERC-20 on Ethereum", "© 2026 Nexus (NEX) · 硅基文明 · 以太坊 ERC-20")}
+        {t("© 2026 Nexus (NEX) · The Silicon Economy · ERC-20 on Ethereum", "© 2026 Nexus (NEX) · 硅基经济 · 以太坊 ERC-20")}
       </footer>
     </main>
   );

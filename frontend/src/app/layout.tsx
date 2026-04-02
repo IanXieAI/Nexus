@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nexus ($NEX)",
-  description: "Nexus: Architecting the Silicon Civilization.",
+  description: "Nexus: Architecting the Silicon Economy.",
 };
 
 export default function RootLayout({
